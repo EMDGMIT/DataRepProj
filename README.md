@@ -10,9 +10,8 @@ The type of users I'd imagine using the app are parents of children aged 18 mont
 ### About the data
 
 This dataset was received in Comma Separated Values (CSV) format, and was downloaded from https://data.gov.ie/dataset/playgrounds-county-galway
-The CSV file contains 63 rows, the first being a header row with the names of each column.
 
-There are sixteen values on each line, which are as follows:
+The CSV file contains 63 rows, the first being a header row with the names of each column. There are sixteen values on each line, which are as follows:
 
 >    * X: UTM x coodrinate?
 >    * Y: UTM y coodrinate?
