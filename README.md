@@ -15,8 +15,8 @@ The CSV file contains 63 rows, the first being a header row with the names of ea
 
 | Field       | Description                                                 |
 | ----------- |:-----------------------------------------------------------:|
-| X           | UTM x coodrinate?                                           |
-| Y           | UTM y coodrinate?                                           |
+| X           | UTM(?) x coodrinate                                         |
+| Y           | UTM(?) y coodrinate                                         |
 | FID         | Unique ID of the row, Primary Key                           |
 | ID          | Similar to FID, between FID 34 - 57, ID + 1                 |
 | Location_o  | Location of playground                                      |
@@ -61,9 +61,9 @@ The data will be returned in JSON format, with the following properties for each
    
 An example of a response would be:
 ```JSON
-[ {"Location": "West Galway" / "Conamara", 
-   "Location": "East Galway" / "Ballinasloe",
-   "Location": "Central Galway" / "Oranmore" / "Athenry",
+[ {"Location": "West Galway" or "Conamara", 
+   "Location": "East Galway" or "Ballinasloe",
+   "Location": "Central Galway" or "Oranmore" or "Athenry",
    "Location": "Corofin"}]
 ```
 
