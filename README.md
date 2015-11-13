@@ -13,146 +13,132 @@ This dataset was received in Comma Separated Values (CSV) format, and was downlo
 
 The CSV file contains 63 rows, the first being a header row with the names of each column. There are sixteen values on each line, which are as follows:
 
->    * X: UTM x coodrinate?
->    * Y: UTM y coodrinate?
->    * FID: the id of the row //primary key?
->    * ID: similar to FID, between FID 34 - 57, ID + 1
->    * location_o: location of playground, all addresses in Conamara in Irish, others in English with Irish in brackets
->    * Area_: general area playground is located, usually most well known town
->    * Managed_By: who owns / manages the playground
->    * Playground: another adddress of playground, sometimes street name
->    * AGE_GROUP: int, range 0 - 99
->    * List_of_Eq: all playground equipment at said playground
->    * Liosta_Eq: all playground equipment at said playground in Irish
->    * List_of_00: specific playground equipment? (Fields listed as yes, none specified, or certain playground equipment)
->    * PUBLIC_TOI: public toilets at playground, true/false
->    * OPENING_HO: times in which playground is open
->    * PARKING: true/false
->    * PHOTO: JPG of playground
+| Field       | Description                                                 |
+| ----------- |:-----------------------------------------------------------:|
+| X           | UTM x coodrinate?                                           |
+| Y           | UTM y coodrinate?                                           |
+| FID         | Unique ID of the row, Primary Key                           |
+| ID          | Similar to FID, between FID 34 - 57, ID + 1                 |
+| Location_o  | Location of playground                                      |
+| Area_       | Region playground is located (usually most well known town) |
+| Managed_By  | Who owns / manages the playground                           |
+| Playground  | Street name of playground                                   |
+| AGE_GROUP   | Age range of playground                                     |
+| List_of_Eq  | All playground equipment at said playground                 |
+| Liosta_Eq   | All playground equipment at said playground in Irish        |
+| List_of_00  | Specific playground equipment                               |
+| PUBLIC_TOI  | Public toilets at playground                                |
+| OPENING_HO  | Times in which playground is open                           |
+| PARKING     | Available parking near playground                           |
+| PHOTO       | JPG of playground                                           |
 
-##Design Idea##
+## List of Playgrounds
+You can get a list of playgroundss in Galway using the GET method at the following URL:
+*http://GalwayPlaygrounds.ie/location*
 
-The app should be user friendly, therefore I am thinking of using only 2 windows. 
+The data will be returned in JSON format, with the following properties for each Tennis Court:
 
-###MENU###
-
-Below is a link to a png file of a template I designed:
-https://cloud.githubusercontent.com/assets/8780936/10644662/c16f5df0-7821-11e5-9c0c-a085f82fa7a1.png
-
-The app should open straight to the menu, where you have 2 options:
-> #####Area######
- 
-This would consist of a drop down list where you choose what area you are in.
- 
-> ######Materials#####
-
-This would consist of a drop down list where you choose what materials you want to recycle.
-
-###RESULT###
-
-Below is a link to a png file of a template I designed
-https://cloud.githubusercontent.com/assets/8780936/10644566/494ae54c-7821-11e5-8d50-8372affcca19.png
-
-This page will consist of the data including:
-
->    * Area (String)
->    * Location (String)
->    * Glass: True/False
->    * Cans: True/False
->    * Textiles: True/False
-
-#####MAP#####
-
-The App could also have a map considering that there are co-ordinates in the 'Latitude' and 'Longtitude' column's
-
-###URL's###
-
-####List of bring banks in a given area####
-This will give a list of the bring banks in a given area. it will also show what materials the bring bank accepts
-
-```markdown
-*http://bringbanks.com/area/[area]*
-where you replace [area] with the location.
-For example, the URL:
-*http://bringbanks.com/area/swords*
-will return a list of bring banks located in swords.
+| Field         | Description                                                 |
+| ------------- |:-----------------------------------------------------------:|
+| Location      | Location of the playground                                  |
+   
+An example of a response would be:
+```JSON
+[ {"Location": "Maam", 
+   "Location": "Mountbellew",
+   "Location": "An Cheatrú Rua",
+   "Location": "Tuam (Palace Grounds)"}]
 ```
 
-####List of bring banks that accept glass####
-This will give a list of the bring banks that accept glass. It will also show what other matreials are and their locations.
+You can also get a list of playgroundss in Galway using the GET method at the following URL:
+*http://GalwayPlaygrounds.ie/area*
 
-```markdown
-*http://bringbanks.com/glass/[glass]*
-where you replace [glass] with the glass.
-For example, the URL:
-*http://bringbanks.com/glass*
-will return a list of bring banks that accept glass.
+The data will be returned in JSON format, with the following properties for each playground:
+
+| Field         | Description                                                 |
+| ------------- |:-----------------------------------------------------------:|
+| Area          | Region playground is located                                |
+   
+An example of a response would be:
+```JSON
+[ {"Location": "West Galway" / "Conamara", 
+   "Location": "East Galway" / "Ballinasloe",
+   "Location": "Central Galway" / "Oranmore" / "Athenry",
+   "Location": "Corofin"}]
 ```
 
-####List of bring banks that accept cans####
-This will give a list of the bring banks that accept cans. It will also show what other matreials are accepted and their locations.
+## Displaying a specific Playground by Location
+You can get data on a specific Playground using a GET method at the following URL:
+*http://GalwayPlaygrounds.ie/playground/[location]*
+where you replace [location] with the location name of the playground. This is very usefull for people who already know the name of the location but not the coordinates.
 
-```markdown
-*http://bringbanks.com/cans/[cans]*
-where you replace [cans] with the cans.
+Where there is a space and *underscore (_)* is needed.
+
 For example, the URL:
-*http://bringbanks.com/cans*
-will return a list of bring banks that accept cans.
+*http://GalwayPlaygrounds.ie/playground/An_Caiseal*
+will display the data of the playground in Cashel.
+The data will be returned in JSON format, with the following properties for each playground:
+
+| Field      | Description                |
+| ---------- |:--------------------------:|
+| Location   | An Caiseal                 |
+| X          | -1093053                   |
+| Y          | 7060998                    |
+| Area       | West Galway - Conamara     |
+| Playground | The Fair Green, Cashel     |
+| Age Group  | 2 - 17 Years               |
+| Equipment  | Spring Bowl, Spring Bike, Climber and Slide, Basket Swing and Multi Use Games Goal |
+
+An example of a response would be:
+```JSON
+[ {"Location": "An Cloigeann",
+   "X": -1124629,
+   "Y": 7085963,
+   "Area": "West Galway - Conamara",
+   "Playground": "Cleggan",
+   "Age Group": "All",
+   "Equipment": "Spring Rocker, 4 Seat Springer, Slide, Spinning Bowl and Basket Swing"}]
 ```
 
-####List of bring banks that accept textiles####
-This will give a list of the bring banks that accept textiles. It will also show what other matreials are accepted and their locations.
+## Adding new Playgrounds to the Dataset
+With the expansion of Galway City and its many surrounding towns and villages, it is very possible that new playgrounds could be built. Because of this we need to make it possible to be able to add new playgrounds to the Dataset. We do this using the POST method.
 
-```markdown
-*http://bringbanks.com/textiles/[textiles]*
-where you replace [textiles] with the textiles.
-For example, the URL:
-*http://bringbanks.com/textiles*
-will return a list of bring banks that accept textiles.
+The POST methods URL would be something similar to:
+*http://GalwayPlaygrounds.ie/addPlayground*
+
+An example of the HTTP POST method message:
+```HTTP
+POST /GalwayPlaygrounds/addPlayground HTTP/1.1
+Host: GalwayPlaygrounds.ie
+x="-1030040"&y="7054112"&fid="64"&id="64"&location_o="Roscahill"&area_="West_Galway_-_Conamara"&managed_by="Galway_City_Council"&playground="Kilannin_Pitch,_Roscahill"&age_group="1-12_Years"&list_of_eq="Slide,_Spinning_Bowl,_Spring_Seesaw,_Flat_Swings,_Playhouse"&public_toi="Yes"&opening_ho="Daylight_Hours"&parking="YES"
 ```
 
-####List of bring banks in a given area that accept glass####
-This will give a list of the bring banks in a given area that take glass. It will also show what other matreials are accepted and their locations
+## Deleting a Playground from the Dataset
+Just like how a playground can be built, they can be knocked down and because of this we should be able to delete playgrounds from the dataset.
 
-```markdown
-*http://bringbanks.com/area-glass/[area]glass*
-where you replace [area] with the area.
-For example, the URL:
-*http://bringbanks.com/location-glass/swords-glass*
-will return a list of bring banks located in swords that accept glass.
+With use of the FID and the DELETE method in the URL a tennis court can easily be removed from the dataset
+
+Such a URL would be:
+*http://GalwayPlaygrounds.ie/delete/[FID=#]*
+
+(where # is the FID number)
+
+60 - (OK)
+64 - (Accepted)
+65 - (No Content)
+
+```HTTP
+POST /GalwayPlaygrounds/addPlayground HTTP/1.1 64
+Host: GalwayPlaygrounds.ie
+"Playground Removed"
 ```
 
-####List of bring banks in a given area that accept cans####
-This will give a list of the bring banks in a given area that take cans. It will also show what other matreials are accepted and their locations
+##An example of a URL that would include city####
 
 ```markdown
-*http://bringbanks.com/area-cans/[area]-cans*
-where you replace [area] with the area.
+*http://GalwayPlaygrounds.com/[county]/[town/city]/[area]*
 For example, the URL:
-*http://bringbanks.com/area-cans/swords-cans*
-will return a list of bring banks located in swords that accept cans.
+*http://GalwayPlaygrounds.com/Galway/Galway/Renmore*
+will return a list of playgrounds located in Renmore.
 ```
 
-####List of bring banks in a given area that accept textiles####
-This will give a list of the bring banks in a given area that take textiles. It will also show what other matreials are accepted and their locations
-
-```markdown
-*http://bringbanks.com/area-textiltes/[area]-textiltes*
-where you replace [area] with the area.
-For example, the URL:
-*http://bringbanks.com/area-textiles/swords-textiles*
-will return a list of bring banks located in swords that accept textiles.
-```
-
-####An example of a URL that would be country wide####
-
-```markdown
-*http://bringbanks.com/[county]/[town/city]/[area]*
-For example, the URL:
-*http://bringbanks.com/Galway/Galway/Renmore*
-will return a list of bring banks located in Renmore.
-```
-
-
-The clip arts I used in the result window, I found at the following website:
-> https://openclipart.org/
